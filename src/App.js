@@ -18,9 +18,20 @@ function Route({ path, children }) {
   }
 }
 
+function Header() {
+  return (
+    <>
+      <a href="/">Home</a>
+      <a href="/movie">Movie</a>
+      <a href="/tv">Tv</a>
+    </>
+  );
+}
+
 function App() {
   return (
     <>
+      <Header />
       <Route path="/">
         <Home />
       </Route>
