@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 function Home() {
   return <div>Home</div>;
 }
@@ -11,7 +13,13 @@ function Tv() {
 }
 
 function Route({ path, children }) {
-  if (path === window.location.pathname) {
+  const [newPath, setNewPath] = useState(window.location.pathname);
+  useEffect(() => {
+    window.addEventListener("popstate", () => {
+      setNewPath(window.location.pathname);
+    });
+  }, []);
+  if (path === newPath) {
     return children;
   } else {
     return null;
@@ -23,6 +31,7 @@ function Link({ to, children }) {
     event.preventDefault();
 
     window.history.pushState({}, "", path);
+    window.dispatchEvent(new PopStateEvent("popstate"));
   };
   return (
     <a href={to} onClick={(e) => handleOnClick(e, to)}>
