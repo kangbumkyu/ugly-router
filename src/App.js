@@ -19,11 +19,22 @@ function Route({ path, children }) {
 }
 
 function Header() {
+  const handleOnClick = (event, path) => {
+    event.preventDefault();
+
+    window.history.pushState({}, "", path);
+  };
   return (
     <>
-      <a href="/">Home</a>
-      <a href="/movie">Movie</a>
-      <a href="/tv">Tv</a>
+      <a href="/" onClick={(e) => handleOnClick(e, "/")}>
+        Home
+      </a>
+      <a href="/movie" onClick={(e) => handleOnClick(e, "/movie")}>
+        Movie
+      </a>
+      <a href="/tv" onClick={(e) => handleOnClick(e, "/tv")}>
+        Tv
+      </a>
     </>
   );
 }
